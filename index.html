@@ -5,41 +5,41 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Nghe nhạc cùng tôi</title>
+
   <style>
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
       min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
+      padding: 24px 14px;
       font-family: Arial, sans-serif;
-      background: #edf2f8;
+      background: linear-gradient(135deg, #edf2f8, #dce7f5);
       color: #20334b;
     }
 
     .card {
       width: 100%;
-      max-width: 560px;
-      padding: 28px;
-      border-radius: 18px;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 26px;
+      border-radius: 20px;
       background: white;
       box-shadow: 0 8px 30px #17365a1c;
-      text-align: center;
     }
 
     header {
-      margin: -28px -28px 26px;
+      margin: -26px -26px 24px;
       padding: 28px 18px;
-      border-radius: 18px 18px 0 0;
+      border-radius: 20px 20px 0 0;
       background: #17365a;
       color: white;
+      text-align: center;
     }
 
     h1 { margin: 0 0 10px; font-size: 27px; }
-    .message { font-size: 18px; line-height: 1.7; }
-    .note { margin-top: 18px; color: #68788b; font-size: 13px; }
+    h2 { font-size: 21px; margin-top: 28px; }
+    .message { text-align: center; font-size: 17px; line-height: 1.7; }
 
     iframe {
       display: block;
@@ -47,34 +47,397 @@
       aspect-ratio: 16 / 9;
       border: 0;
       border-radius: 12px;
+      margin-top: 20px;
+    }
+
+    .center { text-align: center; }
+
+    button, input, textarea {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 16px;
+      cursor: pointer;
+      transition: transform .15s, opacity .15s;
+    }
+
+    button:hover { opacity: .88; }
+    button:active { transform: scale(.98); }
+
+    .heart-btn {
+      margin-top: 16px;
+      background: #fff0f3;
+      color: #d6335c;
+      font-size: 17px;
+      border: 1px solid #ffd2dd;
+    }
+
+    .heart-btn.liked {
+      background: #d6335c;
+      color: white;
+    }
+
+    .section {
+      margin-top: 28px;
+      padding-top: 4px;
+      border-top: 1px solid #e7edf4;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin: 14px 0 7px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccd7e5;
+      border-radius: 10px;
+      background: #fbfcfe;
+      color: #20334b;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 78px;
+    }
+
+    .primary {
+      width: 100%;
+      margin-top: 16px;
+      background: #17365a;
+      color: white;
+      font-weight: bold;
+    }
+
+    .status {
+      margin-top: 12px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .song-item {
+      margin-top: 12px;
+      padding: 14px;
+      border: 1px solid #e1e8f0;
+      border-radius: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .song-item p { margin: 7px 0; }
+
+    .tag {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 20px;
+      background: #eef2f7;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .approved { background: #e1f7e9; color: #17683a; }
+    .pending { background: #fff1cf; color: #805b00; }
+    .rejected { background: #ffe4e4; color: #a32727; }
+
+    .admin-box {
+      margin-top: 30px;
+      padding: 16px;
+      background: #f4f7fb;
+      border-radius: 14px;
+    }
+
+    .admin-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .approve-btn { background: #d9f4e3; color: #17683a; }
+    .reject-btn { background: #ffe1e1; color: #a32727; }
+    .delete-btn { background: #e3e8ef; color: #334155; }
+
+    .note {
       margin-top: 22px;
+      color: #68788b;
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .hidden { display: none; }
+
+    @media (max-width: 480px) {
+      .card { padding: 20px; }
+      header { margin: -20px -20px 22px; }
+      h1 { font-size: 23px; }
     }
   </style>
 </head>
+
 <body>
-  <main class="card">
-    <header>
-      <h1>TRANG THÔNG TIN</h1>
-      <div>Thông điệp và âm nhạc</div>
-    </header>
+<main class="card">
 
-    <div class="message">
-      Chào mừng bạn đến với trang web của tôi!
+  <header>
+    <h1>TRANG THÔNG TIN</h1>
+    <div>Thông điệp và âm nhạc 🎵</div>
+  </header>
+
+  <div class="message">
+    Chào mừng bạn đến với trang web của tôi!
+    <br>
+    Cùng nghe nhạc và chia sẻ những bài hát yêu thích nhé.
+  </div>
+
+  <h2 class="center">🎵 Bản nhạc hiện tại</h2>
+
+  <iframe
+    id="musicPlayer"
+    src="https://www.youtube-nocookie.com/embed/MjE3Yxrv5NY"
+    title="Trình phát nhạc YouTube"
+    allow="encrypted-media; picture-in-picture"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen>
+  </iframe>
+
+  <div class="center">
+    <button class="heart-btn" id="heartBtn" type="button">
+      🤍 Thả tim <span id="likeCount">0</span>
+    </button>
+    <div class="status" id="heartMessage">
+      Nếu bạn thích trang này, hãy thả một trái tim nhé!
     </div>
+  </div>
 
-    <h2>Bản nhạc của tôi 🎵</h2>
+  <section class="section">
+    <h2>💌 Order bài hát</h2>
+    <p>Hãy gửi bài hát bạn muốn nghe. Tôi sẽ xem xét trước khi duyệt phát.</p>
 
-    <iframe
-      src="https://www.youtube-nocookie.com/embed/MjE3Yxrv5NY"
-      title="Trình phát nhạc YouTube"
-      allow="encrypted-media; picture-in-picture"
-      referrerpolicy="strict-origin-when-cross-origin"
-      allowfullscreen>
-    </iframe>
+    <form id="songForm">
+      <label for="nickname">Tên hoặc biệt danh</label>
+      <input id="nickname" maxlength="40"
+             placeholder="Ví dụ: Minh" required>
 
-    <div class="note">
-      Nhấn nút phát trên trình phát để nghe nhạc.
+      <label for="songName">Tên bài hát</label>
+      <input id="songName" maxlength="120"
+             placeholder="Bạn muốn nghe bài nào?" required>
+
+      <label for="artist">Ca sĩ</label>
+      <input id="artist" maxlength="100"
+             placeholder="Tên ca sĩ (nếu biết)">
+
+      <label for="songMessage">Lời nhắn (không bắt buộc)</label>
+      <textarea id="songMessage" maxlength="300"
+                placeholder="Gửi lời nhắn của bạn..."></textarea>
+
+      <button class="primary" type="submit">
+        Gửi yêu cầu bài hát 🎶
+      </button>
+
+      <div class="status" id="formMessage" role="status"></div>
+    </form>
+  </section>
+
+  <section class="section">
+    <h2>📋 Danh sách yêu cầu</h2>
+    <p class="status">
+      Chỉ những bài được duyệt mới có thể xuất hiện trong danh sách được chọn.
+    </p>
+    <div id="publicSongs"></div>
+  </section>
+
+  <section class="admin-box">
+    <h2>🔐 Khu vực duyệt bài</h2>
+    <p class="status">
+      Bản thử nghiệm trên trình duyệt này chưa có đăng nhập quản trị an toàn.
+      Không dùng khu vực này để quản lý yêu cầu thật trên website công khai.
+    </p>
+
+    <button class="primary" id="toggleAdmin" type="button">
+      Mở / đóng danh sách duyệt
+    </button>
+
+    <div id="adminPanel" class="hidden">
+      <div id="adminSongs"></div>
     </div>
-  </main>
+  </section>
+
+  <div class="note">
+    Trang web âm nhạc cá nhân · Hãy tôn trọng bản quyền âm nhạc.
+  </div>
+
+</main>
+
+<script>
+  const SONG_KEY = "music_requests_demo_v1";
+  const LIKE_KEY = "music_likes_demo_v1";
+  const LIKED_KEY = "music_liked_demo_v1";
+
+  const heartBtn = document.getElementById("heartBtn");
+  const likeCount = document.getElementById("likeCount");
+  const heartMessage = document.getElementById("heartMessage");
+  const songForm = document.getElementById("songForm");
+  const formMessage = document.getElementById("formMessage");
+  const publicSongs = document.getElementById("publicSongs");
+  const adminSongs = document.getElementById("adminSongs");
+  const adminPanel = document.getElementById("adminPanel");
+
+  function readSongs() {
+    try {
+      return JSON.parse(localStorage.getItem(SONG_KEY) || "[]");
+    } catch {
+      return [];
+    }
+  }
+
+  function saveSongs(songs) {
+    localStorage.setItem(SONG_KEY, JSON.stringify(songs));
+  }
+
+  function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[char]);
+  }
+
+  function updateLikes() {
+    const count = Number(localStorage.getItem(LIKE_KEY) || 0);
+    const liked = localStorage.getItem(LIKED_KEY) === "yes";
+
+    likeCount.textContent = count;
+    heartBtn.classList.toggle("liked", liked);
+    heartBtn.innerHTML =
+      (liked ? "❤️ Đã thả tim " : "🤍 Thả tim ") +
+      '<span id="likeCount">' + count + "</span>";
+
+    heartMessage.textContent = liked
+      ? "Cảm ơn bạn đã thả tim! ❤️"
+      : "Nếu bạn thích trang này, hãy thả một trái tim nhé!";
+  }
+
+  heartBtn.addEventListener("click", () => {
+    const liked = localStorage.getItem(LIKED_KEY) === "yes";
+    let count = Number(localStorage.getItem(LIKE_KEY) || 0);
+
+    if (liked) {
+      localStorage.setItem(LIKED_KEY, "no");
+      count = Math.max(0, count - 1);
+    } else {
+      localStorage.setItem(LIKED_KEY, "yes");
+      count += 1;
+    }
+
+    localStorage.setItem(LIKE_KEY, String(count));
+    updateLikes();
+  });
+
+  songForm.addEventListener("submit", event => {
+    event.preventDefault();
+
+    const song = {
+      id: Date.now().toString() + Math.random().toString(16).slice(2),
+      nickname: document.getElementById("nickname").value.trim(),
+      name: document.getElementById("songName").value.trim(),
+      artist: document.getElementById("artist").value.trim(),
+      message: document.getElementById("songMessage").value.trim(),
+      status: "pending",
+      createdAt: new Date().toLocaleString("vi-VN")
+    };
+
+    if (!song.nickname || !song.name) {
+      formMessage.textContent = "Vui lòng nhập tên và tên bài hát.";
+      return;
+    }
+
+    const songs = readSongs();
+    songs.unshift(song);
+    saveSongs(songs);
+
+    songForm.reset();
+    formMessage.textContent =
+      "Đã ghi nhận yêu cầu trên trình duyệt này. Vui lòng chờ duyệt!";
+    renderSongs();
+  });
+
+  function statusLabel(status) {
+    if (status === "approved") return "Đã duyệt";
+    if (status === "rejected") return "Không duyệt";
+    return "Đang chờ duyệt";
+  }
+
+  function songCard(song, isAdmin = false) {
+    const statusClass = song.status === "approved"
+      ? "approved"
+      : song.status === "rejected" ? "rejected" : "pending";
+
+    return `
+      <article class="song-item">
+        <strong>${escapeHTML(song.name)}</strong>
+        ${song.artist ? `<p>Ca sĩ: ${escapeHTML(song.artist)}</p>` : ""}
+        <p>Người gửi: ${escapeHTML(song.nickname)}</p>
+        ${song.message ? `<p>Lời nhắn: ${escapeHTML(song.message)}</p>` : ""}
+        <p class="status">Gửi lúc: ${escapeHTML(song.createdAt)}</p>
+        <span class="tag ${statusClass}">${statusLabel(song.status)}</span>
+        ${isAdmin ? `
+          <div class="admin-actions">
+            <button class="approve-btn" data-action="approved"
+                    data-id="${escapeHTML(song.id)}">Duyệt</button>
+            <button class="reject-btn" data-action="rejected"
+                    data-id="${escapeHTML(song.id)}">Từ chối</button>
+            <button class="delete-btn" data-action="delete"
+                    data-id="${escapeHTML(song.id)}">Xóa</button>
+          </div>
+        ` : ""}
+      </article>
+    `;
+  }
+
+  function renderSongs() {
+    const songs = readSongs();
+    const approved = songs.filter(song => song.status === "approved");
+
+    publicSongs.innerHTML = approved.length
+      ? approved.map(song => songCard(song)).join("")
+      : '<p class="status">Chưa có bài hát nào được duyệt.</p>';
+
+    adminSongs.innerHTML = songs.length
+      ? songs.map(song => songCard(song, true)).join("")
+      : '<p class="status">Chưa có yêu cầu nào.</p>';
+  }
+
+  document.getElementById("toggleAdmin").addEventListener("click", () => {
+    adminPanel.classList.toggle("hidden");
+  });
+
+  adminSongs.addEventListener("click", event => {
+    const button = event.target.closest("button[data-action]");
+    if (!button) return;
+
+    const { action, id } = button.dataset;
+    let songs = readSongs();
+
+    if (action === "delete") {
+      songs = songs.filter(song => song.id !== id);
+    } else {
+      songs = songs.map(song =>
+        song.id === id ? { ...song, status: action } : song
+      );
+    }
+
+    saveSongs(songs);
+    renderSongs();
+  });
+
+  updateLikes();
+  renderSongs();
+</script>
 </body>
 </html>
